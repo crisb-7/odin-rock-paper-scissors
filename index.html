@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaScript Fundamentals</title>
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>JavaScript Fundamentals</title>
+    </head>
     <body>
-        <button id="0" class="game">Rock</button>
-        <button id="1" class="game">Paper</button>
-        <button id="2" class="game">Scissors</button>
-        <button class="reset">Play Again</button>
+        <div class="header">
+            <p class="title">Rock, Paper, Scissors!</p>
+            <p class="subtitle">First to 5 against the computer!&#128520;</p>
+        </div>
+        <div class="play-buttons">
+            <button id="0" class="game">Rock &#9994;</button>
+            <button id="1" class="game">Paper &#9995;</button>
+            <button id="2" class="game">Scissors &#9996;</button>
+        </div>
+        <div class="controls">
+            <button class="reset">Play Again</button>
+        </div>
         <div class="round">
             <div class="result"></div>
             <div class="score"></div>
