@@ -15,50 +15,50 @@ function randomInt(min, max) {
 }
 
 function determineRoundWinner(result) {
+    let text;
     switch (result) {
         case 1:
             playerScore += 1;
-            writeRound("You won this round!");
-            displayScore();
+            text = "You won this round!";
             break;
         case 0:
             botScore += 1;
-            writeRound("You lost this round!");
-            displayScore();
+            text = "You lost this round!";
             break;
         case -1:
-            writeRound("It's a tie!");
-            displayScore();
+            text = "It's a tie!";
             break;
         default:
-            writeRound("Sorry, something unexpected happened");
+            text = "Sorry, something unexpected happened";
     }
+    writeDiv(text, ".result");
+    displayScore();
 }
 
 function determineMatchWinner() {
+    let text;
     if (playerScore >= maxWins) {
-        writeRound("You won the match!");
+        text = "You won the match!";
     } else if (botScore >= maxWins) {
-        writeRound("You lost the match!");
+        text = "You lost the match!";
     } else {
+        writeDiv("", ".match")
         return;
     }
     playerScore = 0;
     botScore = 0;
-    writeRound("Thanks for playing");
+    writeDiv(text + " Thanks for playing!", ".match")
 }
 
-function writeRound(text) {
-    let result = document.createElement("div");
-    const body = document.querySelector("body")
-    result.innerHTML = "<div>" + text + "</div>";
-    body.append(result);
+function writeDiv(text, divClass) {
+    const div = document.querySelector(divClass);
+    div.innerHTML = text;
 }
 
 function displayScore() {
     let score;
     score = `<ul><li>Player - ${playerScore}</li> <li>Computer - ${botScore}</li>`;
-    writeRound(score);
+    writeDiv(score, ".score");
 }
 
 function playRound(selection) {
@@ -71,10 +71,20 @@ function playRound(selection) {
 let playerScore = 0;
 let botScore = 0;
 let maxWins = 5;
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll("button.game");
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         let playerSelection = parseInt(button.id);
         playRound(playerSelection);
     });
+});
+
+const reset = document.querySelector(".reset");
+reset.addEventListener("click", () => {
+    playerScore = 0;
+    botScore = 0;
+    gameInfo = [".result", ".score", ".match"];
+    for (div of gameInfo) {
+        writeDiv("", div);
+    }
 });
